@@ -33,7 +33,7 @@ def calculaFitness(individuo, capacidadeDeCarga, itens):
         if (capacidadeDeCarga - pesoTotal) < 0:
             return -1 #Peso total do caminhão excedido.
         else:
-            return pesoTotal
+            return valorTotal
     
 def evoluiPopulacao(populacao, capacidadeDeCarga, itens, numeroDeIndividuos, mutacao=0.05):
     #Classifica o fitness e seu respectivo indivíduo em um array

@@ -4,7 +4,7 @@ class Item:
 
     def __init__(self, nome, peso, valor):
         self.nome = nome
-        self.peso = peso #em gramas
+        self.peso = peso #em quilos
         self.valor = valor #em Reais
 
     def getNome(self):
