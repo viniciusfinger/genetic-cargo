@@ -25,15 +25,17 @@ def calculaFitness(individuo, capacidadeDeCarga, itens):
     #Faz a avaliação de um único indivíduo
     pesoTotal = 0
     valorTotal = 0
+    indiceItem = 0
 
-    for indiceItem in individuo:
+    while indiceItem < len(individuo):
         pesoTotal = pesoTotal + (individuo[indiceItem] * itens[indiceItem].getPeso())
         valorTotal = valorTotal + (individuo[indiceItem] * itens[indiceItem].getValor())
+        indiceItem += 1
 
-        if (capacidadeDeCarga - pesoTotal) < 0:
-            return -1 #Peso total do caminhão excedido.
-        else:
-            return valorTotal
+    if (capacidadeDeCarga - pesoTotal) < 0:
+        return -1 #Peso total do caminhão excedido.
+    else:
+        return valorTotal
     
 def evoluiPopulacao(populacao, capacidadeDeCarga, itens, numeroDeIndividuos, mutacao=0.05):
     #Classifica o fitness e seu respectivo indivíduo em um array
