@@ -1,17 +1,17 @@
-from random import getrandbits, random
+from random import getrandbits, random, randint
 
 def criaIndividuo(numeroDeItens):
     """
-    Gera um array chamado indivíduo (um cromossomos), onde cada posição desse array 
+    Gera um array chamado indivíduo (cromossomos), onde cada posição desse array 
     representa um item que caso estiver com 1 no valor será levado no caminhão 
     e 0 não será levado.
     """
     individuo = [getrandbits(1) for x in range(numeroDeItens)]
     return individuo
 
-def criaPopulacao(numeroDeCromossomos, numeroDeItens):
+def criaPopulacao(numeroDeIndividuos, numeroDeItens):
     #Cria a populacao de individuos
-    populacao = [criaIndividuo(numeroDeItens) for x in range(numeroDeCromossomos)]
+    populacao = [criaIndividuo(numeroDeItens) for x in range(numeroDeIndividuos)]
     return populacao
 
 def calculaMediaFitness(populacao, pesoMaximo, itens):
@@ -49,8 +49,19 @@ def evoluiPopulacao(populacao, capacidadeDeCarga, itens, numeroDeIndividuos, mut
 
         #Filho vai ser a primeira metade do pai + a primeira metade da mãe
         filho = pai[:meioDoCromossomo] + mae [meioDoCromossomo:]
-        
         filhos.append(filho)
+
+    #Faz a mutação em um cromossomo do indivíduo
+    for filho in filhos:
+        if mutacao > random():
+            cromossomoASerMutado = randint(0, len(filho)-1)
+
+            if filho[cromossomoASerMutado] == 1:
+                filho[cromossomoASerMutado] = 0
+            else:
+                filho[cromossomoASerMutado] = 1
+    
+    return filhos
 
 def sorteiaPais(pais):
     #Sorteia um pai e uma mãe baseado na regra da roleta
@@ -68,7 +79,7 @@ def sorteiaPais(pais):
         for indice, i in enumerate(valores[0]):
             if indiceIgnorado == indice:
                 continue
-            acumulado += 1
+            acumulado += i
             roleta.append(acumulado/fitnessTotal)
 
             if roleta[-1] >= valorSorteado:
