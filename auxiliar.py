@@ -3,7 +3,7 @@ from tkinter import *
 
 def instanciaItens() -> list:
     itens = []
-    
+
     itens.append(Item(nome="Escultura leao", peso=400, valor=0.1))
     itens.append(Item(nome="Escultura cisne", peso=700, valor=10000))
     itens.append(Item(nome="Escultura cristo", peso=2000, valor=500000))
@@ -18,7 +18,7 @@ def printaMelhorIndividuo(populacao, itens):
     cincoUltimosIndividuos = []
     indiceMelhorIndividuo = 0
     valorTotalMelhorIndividuo = 0
-    for i in range(10):
+    for i in range(5):
         cincoUltimosIndividuos.append(populacao[i])
         valorTotalIndividuo = calculaValorTotal(populacao[i],itens)
         if valorTotalIndividuo > valorTotalMelhorIndividuo:
@@ -44,25 +44,11 @@ def printaItensMelhorIndividuo(individuo, itens):
     i = 0
     quantidadeCromossomos = len(individuo)
     valorTotal = 0
-    listaItens = []
 
     while i < quantidadeCromossomos:
         if individuo[i] == 1:
             valorTotal += itens[i].getValor()
-            listaItens.append((itens[i].getNome(),str(itens[i].getPeso()) + "kg", "R$"+str(itens[i].getValor())))
+            print(itens[i].getNome() +" " +str(itens[i].getPeso())+"kg " + "R$"+str(itens[i].getValor()))
         i += 1
 
-    linhas = len(listaItens)
-    colunas = 3
-
-    root.title("Itens selecionados")
-
-    for i in range(linhas):
-        for j in range(colunas):
-            b = Entry(root, text="", width=30)
-            b.grid(row=i, column=j)
-            b.insert(END, listaItens[i][j])
-
-    mainloop()
-
-    print(valorTotal)
+    print("Valor total do melhor indivíduo: R$" + str(valorTotal))
