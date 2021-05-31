@@ -17,5 +17,5 @@ for geracao in range(geracoes):
 #Gera gráfico com histórico da média de fitness e valor total da carga do caminhão
 geraGraficoHistoricoFitness(historicoFitness)
 
-#Criar aqui uma função que exiba a melhor combinação 
+#Printar o melhor indivíduo (Transformar em uma janela)
 printaMelhorIndividuo(populacao, itens)
