@@ -1,7 +1,7 @@
-from dependencias import instanciaItens
+from auxiliar import instanciaItens
 
-capacidadeDeCarga = 1000 #kg
-numeroDeIndividuos = 500
-geracoes = 80
+capacidadeDeCarga = 2000 #kg
+numeroDeIndividuos = 100
+geracoes = 25
 itens = instanciaItens()
 numeroDeItens = len(itens)
