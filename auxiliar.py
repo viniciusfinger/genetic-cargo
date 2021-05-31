@@ -1,4 +1,5 @@
 from Item import *
+from tkinter import *
 
 def instanciaItens() -> list:
     itens = []
@@ -39,14 +40,29 @@ def calculaValorTotal(individuo, itens):
 
 
 def printaItensMelhorIndividuo(individuo, itens): 
+    root = Tk()
     i = 0
     quantidadeCromossomos = len(individuo)
     valorTotal = 0
+    listaItens = []
 
     while i < quantidadeCromossomos:
         if individuo[i] == 1:
             valorTotal += itens[i].getValor()
-            print("Item: " + str(itens[i].getNome()) + ", Valor: " + str(itens[i].getValor()) + ", Peso: " + str(itens[i].getPeso()))
+            listaItens.append((itens[i].getNome(),str(itens[i].getPeso()) + "kg", "R$"+str(itens[i].getValor())))
         i += 1
+
+    linhas = len(listaItens)
+    colunas = 3
+
+    root.title("Itens selecionados")
+
+    for i in range(linhas):
+        for j in range(colunas):
+            b = Entry(root, text="", width=30)
+            b.grid(row=i, column=j)
+            b.insert(END, listaItens[i][j])
+
+    mainloop()
 
     print(valorTotal)
