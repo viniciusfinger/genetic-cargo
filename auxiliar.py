@@ -43,18 +43,24 @@ def processaTabelaHtmlItensIndividuo(individuo, itens):
     objetos = []
     quantidadeCromossomos = len(individuo)
 
+    #Transforma os itens do indivíduo para um objeto JSON
     while i < quantidadeCromossomos:
         if individuo[i] == 1:
             objetos.append(
-                               {"nome":itens[i].getNome(),
-                               "valor":itens[i].getValor(),
-                                "peso":itens[i].getPeso()}
+                               {"Nome":itens[i].getNome(),
+                               "Valor":"R$"+str(itens[i].getValor()),
+                                "Peso":str(itens[i].getPeso())+" kg"}
                              )
         i += 1
         
     html_file = open("tabela.html","w")
-    tabelaHtml = json2html.convert(json=objetos)
+    
+    #Adiciona o bootstrap no frame HTML
+    tabelaHtml = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>'
+    tabelaHtml += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">'
+
+    #Transforma o objeto JSON em uma tabela
+    tabelaHtml += json2html.convert(json=objetos,table_attributes='style="width: 100%;"')
+    
     html_file.write(tabelaHtml)
     html_file.close()
-
-    
