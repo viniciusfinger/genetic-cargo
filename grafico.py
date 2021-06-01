@@ -6,4 +6,6 @@ def geraGraficoHistoricoFitness(historicoFitness):
     plt.title("Melhor combinação para transporte de cargas")
     plt.xlabel("Geração")
     plt.ylabel("Valor médio carregado pelo caminhão")
-    plt.show()
+
+    plt.savefig('grafico.png')
+

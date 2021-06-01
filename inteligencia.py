@@ -1,7 +1,7 @@
 from genetica import *
 from configs import *
 from grafico import *
-from auxiliar import printaMelhorIndividuo
+from auxiliar import processaMelhorIndividuo
 
 populacao = criaPopulacao(numeroDeIndividuos, numeroDeItens)
 
@@ -17,5 +17,5 @@ for geracao in range(geracoes):
 #Gera gráfico com histórico da média de fitness e valor total da carga do caminhão
 geraGraficoHistoricoFitness(historicoFitness)
 
-#Printar o melhor indivíduo (Transformar em uma janela)
-printaMelhorIndividuo(populacao, itens)
+#Processa melhor indivíduo para JSON e abre a página HTML 
+processaMelhorIndividuo(populacao, itens)

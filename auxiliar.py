@@ -1,5 +1,7 @@
 from Item import *
 from tkinter import *
+import json 
+import webbrowser
 
 def instanciaItens() -> list:
     itens = []
@@ -14,7 +16,7 @@ def instanciaItens() -> list:
 
     return itens
 
-def printaMelhorIndividuo(populacao, itens):
+def processaMelhorIndividuo(populacao, itens):
     cincoUltimosIndividuos = []
     indiceMelhorIndividuo = 0
     valorTotalMelhorIndividuo = 0
@@ -25,7 +27,7 @@ def printaMelhorIndividuo(populacao, itens):
             valorTotalMelhorIndividuo = valorTotalIndividuo
             indiceMelhorIndividuo = i
 
-    printaItensMelhorIndividuo(populacao[indiceMelhorIndividuo], itens)
+    transformarItensIndividuoJson(populacao[indiceMelhorIndividuo], itens)
 
 
 def calculaValorTotal(individuo, itens):
@@ -38,17 +40,23 @@ def calculaValorTotal(individuo, itens):
         
     return valorTotal
 
+def escreverJson(objetos):
+    with open('itensMelhorIndividuo.json', 'w') as f:
+        json.dump(objetos, f)
 
-def printaItensMelhorIndividuo(individuo, itens): 
-    root = Tk()
+def transformarItensIndividuoJson(individuo, itens): 
     i = 0
+    objetos = []
     quantidadeCromossomos = len(individuo)
-    valorTotal = 0
 
     while i < quantidadeCromossomos:
         if individuo[i] == 1:
-            valorTotal += itens[i].getValor()
-            print(itens[i].getNome() +" " +str(itens[i].getPeso())+"kg " + "R$"+str(itens[i].getValor()))
+            objetos.append(
+                               {"nome":itens[i].getNome(),
+                               "valor":itens[i].getValor(),
+                                "peso":itens[i].getPeso()}
+                             )
         i += 1
 
-    print("Valor total do melhor indivíduo: R$" + str(valorTotal))
+    escreverJson(objetos)
+    webbrowser.open("lista.html",new=1)
