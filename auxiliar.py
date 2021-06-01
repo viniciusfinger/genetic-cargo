@@ -1,11 +1,12 @@
 from Item import *
 from tkinter import *
 from json2html import *
+import locale
 
 def instanciaItens() -> list:
     itens = []
 
-    itens.append(Item(nome="Escultura leao", peso=400, valor=0.1))
+    itens.append(Item(nome="Escultura leao", peso=400, valor=1))
     itens.append(Item(nome="Escultura cisne", peso=700, valor=10000))
     itens.append(Item(nome="Escultura cristo", peso=2000, valor=500000))
     itens.append(Item(nome="Escultura cristo menor", peso=1000, valor=300000))
@@ -40,19 +41,24 @@ def calculaValorTotal(individuo, itens):
 
 def processaTabelaHtmlItensIndividuo(individuo, itens): 
     i = 0
+    locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
     objetos = []
     quantidadeCromossomos = len(individuo)
+    valorTotal = 0
+    pesoTotal = 0
 
     #Transforma os itens do indivíduo para um objeto JSON
     while i < quantidadeCromossomos:
         if individuo[i] == 1:
+            valorTotal += itens[i].getValor()
+            pesoTotal += itens[i].getPeso()
             objetos.append(
                                {"Nome":itens[i].getNome(),
-                               "Valor":"R$"+str(itens[i].getValor()),
+                               "Valor":locale.currency(itens[i].getValor(), grouping=True),
                                 "Peso":str(itens[i].getPeso())+" kg"}
                              )
         i += 1
-        
+
     html_file = open("tabela.html","w")
     
     #Adiciona o bootstrap no frame HTML
@@ -63,4 +69,14 @@ def processaTabelaHtmlItensIndividuo(individuo, itens):
     tabelaHtml += json2html.convert(json=objetos,table_attributes='style="width: 100%;"')
     
     html_file.write(tabelaHtml)
+    html_file.close()
+
+    objValorTotal = [{"Valor Total da Carga": locale.currency(valorTotal, grouping=True)}]
+    
+    html_file = open("tabela_valortotal.html","w")
+    tabelaHtmlValorTotal = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>'
+    tabelaHtmlValorTotal += '<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">'
+    tabelaHtmlValorTotal += json2html.convert(json=objValorTotal,table_attributes='style="width: 100%;"')
+    
+    html_file.write(tabelaHtmlValorTotal)
     html_file.close()
