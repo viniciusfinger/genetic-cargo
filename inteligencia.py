@@ -1,7 +1,8 @@
 from genetica import *
 from configs import *
 from grafico import *
-from auxiliar import processaMelhorIndividuo
+from auxiliar import processaMelhorIndividuo, processaTabelaHtmlItensIndividuo
+import webbrowser
 
 populacao = criaPopulacao(numeroDeIndividuos, numeroDeItens)
 
@@ -17,5 +18,7 @@ for geracao in range(geracoes):
 #Gera gráfico com histórico da média de fitness e valor total da carga do caminhão
 geraGraficoHistoricoFitness(historicoFitness)
 
-#Processa melhor indivíduo para JSON e abre a página HTML 
-processaMelhorIndividuo(populacao, itens)
+#Processa o melhor indivíduo, seu set de itens, processa e abre a página HTML 
+melhorIndividuo = processaMelhorIndividuo(populacao, itens)
+processaTabelaHtmlItensIndividuo(melhorIndividuo, itens)
+webbrowser.open("lista.html",new=1)

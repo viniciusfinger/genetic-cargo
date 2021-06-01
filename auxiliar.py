@@ -1,7 +1,6 @@
 from Item import *
 from tkinter import *
-import json 
-import webbrowser
+from json2html import *
 
 def instanciaItens() -> list:
     itens = []
@@ -26,9 +25,8 @@ def processaMelhorIndividuo(populacao, itens):
         if valorTotalIndividuo > valorTotalMelhorIndividuo:
             valorTotalMelhorIndividuo = valorTotalIndividuo
             indiceMelhorIndividuo = i
-
-    transformarItensIndividuoJson(populacao[indiceMelhorIndividuo], itens)
-
+    
+    return populacao[indiceMelhorIndividuo]
 
 def calculaValorTotal(individuo, itens):
     qtdItens = len(individuo)
@@ -40,11 +38,7 @@ def calculaValorTotal(individuo, itens):
         
     return valorTotal
 
-def escreverJson(objetos):
-    with open('itensMelhorIndividuo.json', 'w') as f:
-        json.dump(objetos, f)
-
-def transformarItensIndividuoJson(individuo, itens): 
+def processaTabelaHtmlItensIndividuo(individuo, itens): 
     i = 0
     objetos = []
     quantidadeCromossomos = len(individuo)
@@ -57,6 +51,10 @@ def transformarItensIndividuoJson(individuo, itens):
                                 "peso":itens[i].getPeso()}
                              )
         i += 1
+        
+    html_file = open("tabela.html","w")
+    tabelaHtml = json2html.convert(json=objetos)
+    html_file.write(tabelaHtml)
+    html_file.close()
 
-    escreverJson(objetos)
-    webbrowser.open("lista.html",new=1)
+    
