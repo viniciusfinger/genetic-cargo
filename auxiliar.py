@@ -29,6 +29,7 @@ def instanciaItens() -> list:
     itens.append(Item(nome="Jogo 4 pneus", peso=45, valor=2500))
     itens.append(Item(nome="Quadro", peso=45, valor=5000))
     itens.append(Item(nome="Kit anilhas", peso=450, valor=2000))
+    itens.append(Item(nome="2000kg de tinta", peso=2000, valor=20000))
 
 
     return itens
