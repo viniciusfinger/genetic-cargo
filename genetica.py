@@ -50,10 +50,11 @@ def evoluiPopulacao(populacao, capacidadeDeCarga, itens, numeroDeIndividuos, mut
         meioDoCromossomo = len(pai) // 2
 
         #Filho vai ser a primeira metade do pai + a primeira metade da mãe
-        filho = pai[:meioDoCromossomo] + mae [meioDoCromossomo:]
+        filho = pai[:meioDoCromossomo] + mae[meioDoCromossomo:]
         filhos.append(filho)
 
-    #Faz a mutação em um cromossomo do indivíduo
+    '''Há 5% de chance (definido no parâmetro "mutacao" do método)
+    de fazer uma mutação em um cromossomo do indivíduo'''
     for filho in filhos:
         if mutacao > random():
             cromossomoASerMutado = randint(0, len(filho)-1)
@@ -75,6 +76,7 @@ def sorteiaPais(pais):
         acumulado = 0
         valorSorteado = random()
 
+        #fitness total ignora o indivíduo pai, se já houver
         if indiceIgnorado != -1:
             fitnessTotal -= valores[0][indiceIgnorado]        
         

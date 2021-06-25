@@ -1,8 +1,8 @@
 from auxiliar import instanciaItens, geraTabelaConfiguracoes
 
 capacidadeDeCarga = 4000 #kg
-numeroDeIndividuos = 100
-geracoes = 10
+numeroDeIndividuos = 150
+geracoes = 100
 itens = instanciaItens() #Instancia os itens disponíveis para serem carregados
 numeroDeItens = len(itens)
 

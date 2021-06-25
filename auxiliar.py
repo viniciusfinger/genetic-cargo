@@ -6,13 +6,30 @@ import locale
 def instanciaItens() -> list:
     itens = []
 
-    itens.append(Item(nome="Escultura leao", peso=400, valor=1))
-    itens.append(Item(nome="Escultura cisne", peso=700, valor=10000))
-    itens.append(Item(nome="Escultura cristo", peso=2000, valor=500000))
-    itens.append(Item(nome="Escultura cristo menor", peso=1000, valor=300000))
-    itens.append(Item(nome="Escultura teste", peso=2000, valor=1000000))
-    itens.append(Item(nome="Escultura vinicius finger", peso=100, valor=500000))
-    itens.append(Item(nome="Escultura vinicius finger 2", peso=100, valor=500000))
+    itens.append(Item(nome="Cadeira", peso=15, valor=1500))
+    itens.append(Item(nome="Celular top", peso=0.8, valor=8700))
+    itens.append(Item(nome="Notebook", peso=3, valor=4000))
+    itens.append(Item(nome="Piano Yamaha", peso=250, valor=250000))
+    itens.append(Item(nome="Piano Roch", peso=250, valor=250000))
+    itens.append(Item(nome="Televisão 50 pol.", peso=12, valor=3000))
+    itens.append(Item(nome="Televisão 22 pol.", peso=8, valor=999))
+    itens.append(Item(nome="Cama king", peso=100, valor=20000))
+    itens.append(Item(nome="Sofá", peso=120, valor=7000))
+    itens.append(Item(nome="Kit academia", peso=500, valor=15000))
+    itens.append(Item(nome="Escultura de gesso", peso=500, valor=10000))
+    itens.append(Item(nome="Escultura Tigresa", peso=300, valor=87000))
+    itens.append(Item(nome="Escultura de mármore", peso=700, valor=90000))
+    itens.append(Item(nome="Geladeira top", peso=125, valor=10000))
+    itens.append(Item(nome="Geladeira", peso=90, valor=2500))
+    itens.append(Item(nome="Freezer", peso=90, valor=3500))
+    itens.append(Item(nome="Fogão a lenha n3", peso=100, valor=3500))
+    itens.append(Item(nome="Esteira", peso=130, valor=2500))
+    itens.append(Item(nome="Mesa tampo de mármore 6 cadeiras", peso=100, valor=8000))
+    itens.append(Item(nome="Livro", peso=0.3, valor=35))
+    itens.append(Item(nome="Jogo 4 pneus", peso=45, valor=2500))
+    itens.append(Item(nome="Quadro", peso=45, valor=5000))
+    itens.append(Item(nome="Kit anilhas", peso=450, valor=2000))
+
 
     return itens
 
@@ -82,7 +99,9 @@ def processaTabelaHtmlItensIndividuo(individuo, itens):
     html_file.write(tabelaHtml)
     html_file.close()
 
-    objValorTotal = [{"Valor Total da Carga": locale.currency(valorTotal, grouping=True)}]
+    objValorTotal = [{"Valor Total da Carga": locale.currency(valorTotal, grouping=True),
+                      "Peso Total da Carga:": round(pesoTotal, 2)
+                    }]
     
     html_file = open("tabela_valortotal.html","w")
     tabelaHtmlValorTotal = '<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>'
