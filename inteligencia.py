@@ -1,8 +1,8 @@
+from dashboard import abreDashboard
 from genetica import *
 from configs import *
 from web.grafico import *
 from auxiliar import processaMelhorIndividuo, processaTabelaHtmlItensIndividuo
-import webbrowser
 
 #Cria a população inicial de forma psuedo-aleatória
 populacao = criaPopulacao(numeroDeIndividuos, numeroDeItens)
@@ -22,4 +22,5 @@ geraGraficoHistoricoFitness(historicoFitness)
 #Processa o melhor indivíduo, seu set de itens e processa e abre a página HTML 
 melhorIndividuo = processaMelhorIndividuo(populacao, itens)
 processaTabelaHtmlItensIndividuo(melhorIndividuo, itens)
-webbrowser.open("lista.html",new=1)
+
+abreDashboard()
