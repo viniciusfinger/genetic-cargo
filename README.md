@@ -1,5 +1,5 @@
 <h1 align="center">
   <a href="#">
-   IALog - Inteligência Artificial na Logística 🚚🤖
+   IALog - Inteligência Artificial para Logística 🚚🤖
   </a>
 </h1>
