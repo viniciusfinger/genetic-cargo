@@ -7,5 +7,5 @@ def geraGraficoHistoricoFitness(historicoFitness):
     plt.xlabel("Geração")
     plt.ylabel("Valor médio carregado pelo caminhão (R$)")
 
-    plt.savefig('grafico.png')
+    plt.savefig('./web/grafico.png')
 

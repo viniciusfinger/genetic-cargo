@@ -1,6 +1,6 @@
 from genetica import *
 from configs import *
-from grafico import *
+from web.grafico import *
 from auxiliar import processaMelhorIndividuo, processaTabelaHtmlItensIndividuo
 import webbrowser
 
