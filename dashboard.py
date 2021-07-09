@@ -8,7 +8,6 @@ path = str(pathlib.Path().resolve())
 
 def verificaExistenciaArquivo(nomeArquivo):
     path = str(pathlib.Path().resolve())+"/web/"+nomeArquivo
-    print(path)
     fileObj = pathlib.Path(path)
 
     return pathlib.Path.exists(fileObj)
@@ -33,7 +32,6 @@ def deletaTabelasAntigas():
 def abreDashboard():
     deletaTabelasAntigas()
     moveTabelas()
-    print("file://"+path+"/lista.html")
     webbrowser.open(path+"/web/lista.html",new=1)
 
 
