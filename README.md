@@ -1,4 +1,4 @@
-# Genetic Algorithm for Optimized Truck Loading 🚚🧬
+# Genetic Cargo: Genetic Algorithm for Optimized Truck Loading 🚚🧬
 
 Optimize your truck loading process with a genetic algorithm designed to select the optimal combination between items and values. This algorithm ensures maximum value for your cargo while adhering to weight constraints, streamlining your logistics with precision 🧬
 
