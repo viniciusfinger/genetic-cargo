@@ -1,6 +1,6 @@
 # Genetic Algorithm for Optimized Truck Loading 🚚🧬
 
-A genetic algorithm implementation in Java to optimize the selection of items to be loaded onto a truck. The objective is to maximize the total value of the load while ensuring that the weight limit of the truck is not exceeded.
+Optimize your truck loading process with a genetic algorithm designed to select the optimal combination between items and values. This algorithm ensures maximum value for your cargo while adhering to weight constraints, streamlining your logistics with precision 🧬
 
 ## Features
 
