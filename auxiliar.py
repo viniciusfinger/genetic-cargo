@@ -45,7 +45,7 @@ def geraTabelaConfiguracoes(capacidadeDeCarga, numeroDeIndividuos, geracoes):
     html_file.write(tabelaConfiguracoes)
     html_file.close()
 
-def processaMelhorIndividuo(populacao, itens):
+def get_best_individual(populacao, itens):
     cincoUltimosIndividuos = []
     indiceMelhorIndividuo = 0
     valorTotalMelhorIndividuo = 0
@@ -68,7 +68,7 @@ def calculaValorTotal(individuo, itens):
         
     return valorTotal
 
-def processaTabelaHtmlItensIndividuo(individuo, itens): 
+def generate_html_individual_items(individuo, itens): 
     i = 0
     locale.setlocale(locale.LC_MONETARY, 'pt_BR.UTF-8')
     objetos = []

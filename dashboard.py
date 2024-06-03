@@ -29,7 +29,7 @@ def deletaTabelasAntigas():
     if verificaExistenciaArquivo("tabelaConfiguracoes.html"):
         os.remove(path+"/web/tabelaConfiguracoes.html")
 
-def abreDashboard():
+def open_dashboard():
     deletaTabelasAntigas()
     moveTabelas()
     webbrowser.open(path+"/web/lista.html",new=1)
