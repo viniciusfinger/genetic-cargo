@@ -1,48 +1,55 @@
 from random import getrandbits, random, randint
+from typing import List
+from Individual import *
+from Item import Item
 
-def create_individual(item_quantity):
+def create_individual(item_quantity: int) -> Individual:
     """
-    Gera um array chamado indivíduo (cromossomos), onde cada posição desse array 
-    representa um item que caso estiver com 1 no valor será levado no caminhão 
-    e 0 não será levado.
+    Generate an array called chromossomes. Each position of this array (or one chromossome) 
+    represents an item that will be taken in the truck if the value is 1, and 0 if it will 
+    not be taken. Pseudo-random generated values by gentrandbits function for one bit 
+    (can be 0 or 1).
     """
-    individual = [getrandbits(1) for x in range(item_quantity)]
-    return individual
+    chromossomes = [getrandbits(1) for _ in range(item_quantity)]
+    return Individual(chromossomes)
 
-def create_population(individuals_quantity, item_quantity):
-    #Cria a populacao de individuos
-    population = [create_individual(item_quantity) for x in range(individuals_quantity)]
-    return population
 
-def calculate_average_fitness(population, max_weight, items):
-    #Calcula a avaliação media da população de indivíduos
+def create_population(individuals_quantity: int, item_quantity: int) -> List[Individual]:
+    return [create_individual(item_quantity) for _ in range(individuals_quantity)]
+
+
+def calculate_average_fitness(population: List[Individual], max_weight: float, items: List[Item]):
+    #todo: refactor this method above
     total_fitness = sum(calculate_fitness(individual, max_weight, items) for individual in population if calculate_fitness(individual, max_weight, items) >= 0)
     fitness_average = total_fitness / (len(population) * 1.0)
     
     return fitness_average
 
-def calculate_fitness(individual, load_capacity, items):
-    #Faz a avaliação de um único indivíduo
+def calculate_fitness(individual: Individual, load_capacity: float, items: List[Item]) -> float:
+    """
+    Calculate the fitness of an individual. The fitness is the total value of the items that.
+    """
+    chromossomes = individual.getChromossomes()
     total_weight = 0
     total_value = 0
     item_index = 0
 
-    while item_index < len(individual):
-        total_weight = total_weight + (individual[item_index] * items[item_index].getPeso())
-        total_value = total_value + (individual[item_index] * items[item_index].getValor())
+    while item_index < len(chromossomes):
+        total_weight = total_weight + (chromossomes[item_index] * items[item_index].getWeight())
+        total_value = total_value + (chromossomes[item_index] * items[item_index].getValue())
         item_index += 1
 
     if (load_capacity - total_weight) < 0:
-        return -1 #Peso total do caminhão excedido.
+        return -1 #Peso total do caminhão excedido. //todo: maybe trhow a exception.
     else:
         return total_value
     
-def evolve_population(population, load_capacity, items, indivibuals_number, mutation=0.05):
+def evolve_population(population: List[Individual], load_capacity: float, items: List[Item], indivibuals_number: int, mutation_rate=0.05):
     #Classifica o fitness e seu respectivo indivíduo em um array
     parents_individuals = [[calculate_fitness(individual, load_capacity, items), individual] for individual in population if calculate_fitness(individual,load_capacity, items) >= 0]
     parents_individuals.sort(reverse=True)
 
-    #Reprodução dos indivíduos
+    #individuals reprodution
     children_individuals = []
 
     while len(children_individuals) < indivibuals_number:
@@ -56,7 +63,7 @@ def evolve_population(population, load_capacity, items, indivibuals_number, muta
     '''Há 5% de chance (definido no parâmetro "mutacao" do método)
     de fazer uma mutação em um cromossomo do indivíduo'''
     for children in children_individuals:
-        if mutation > random():
+        if mutation_rate > random():
             chromossome_to_change = randint(0, len(children)-1)
             
             #to-do: estudar uma maneira mais bonita de fazer isso
@@ -102,3 +109,26 @@ def draw_parents(parents_individuals):
     mom_individual = values[1][mom_index]
     
     return dad_individual, mom_individual
+
+def get_best_individual(population, items):
+    five_last_individuals = []
+    best_individual_index = 0
+    best_individual_value = 0
+    for i in range(5):
+        five_last_individuals.append(population[i])
+        invidual_total_value = calculate_total_value(population[i], items)
+        if invidual_total_value > best_individual_value:
+            best_individual_value = invidual_total_value
+            best_individual_index = i
+    
+    return population[best_individual_index]
+
+def calculate_total_value(individual, items):
+    item_quantity = len(individual)
+    total_value = 0
+
+    for i in range(item_quantity):
+        if individual[i] == 1:
+            total_value += items[i].getValue()
+        
+    return total_value
