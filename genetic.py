@@ -1,22 +1,22 @@
 from random import getrandbits, random, randint
 
-def create_individual(numeroDeItens):
+def create_individual(item_quantity):
     """
     Gera um array chamado indivíduo (cromossomos), onde cada posição desse array 
     representa um item que caso estiver com 1 no valor será levado no caminhão 
     e 0 não será levado.
     """
-    individual = [getrandbits(1) for x in range(numeroDeItens)]
+    individual = [getrandbits(1) for x in range(item_quantity)]
     return individual
 
-def create_population(numeroDeIndividuos, numeroDeItens):
+def create_population(individuals_quantity, item_quantity):
     #Cria a populacao de individuos
-    population = [create_individual(numeroDeItens) for x in range(numeroDeIndividuos)]
+    population = [create_individual(item_quantity) for x in range(individuals_quantity)]
     return population
 
-def calculate_average_fitness(population, pesoMaximo, itens):
+def calculate_average_fitness(population, max_weight, items):
     #Calcula a avaliação media da população de indivíduos
-    total_fitness = sum(calculate_fitness(individual, pesoMaximo, itens) for individual in population if calculate_fitness(individual, pesoMaximo, itens) >= 0)
+    total_fitness = sum(calculate_fitness(individual, max_weight, items) for individual in population if calculate_fitness(individual, max_weight, items) >= 0)
     fitness_average = total_fitness / (len(population) * 1.0)
     
     return fitness_average

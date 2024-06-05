@@ -6,32 +6,29 @@ import os
 
 path = str(pathlib.Path().resolve())
 
-def verificaExistenciaArquivo(nomeArquivo):
-    path = str(pathlib.Path().resolve())+"/web/"+nomeArquivo
-    fileObj = pathlib.Path(path)
+def file_exists(file_name):
+    path = str(pathlib.Path().resolve())+"/web/"+file_name
+    file = pathlib.Path(path)
 
-    return pathlib.Path.exists(fileObj)
+    return pathlib.Path.exists(file)
 
 
-
-def moveTabelas():
+def move_table():
     shutil.move(path+"/tabela.html",path+"/web")
     shutil.move(path+"/tabela_valortotal.html",path+"/web")
     shutil.move(path+"/tabelaConfiguracoes.html",path+"/web")
 
-def deletaTabelasAntigas():
-    if verificaExistenciaArquivo("tabela.html"):
+def delete_old_tables():
+    if file_exists("tabela.html"):
         os.remove(path+"/web/tabela.html")
 
-    if verificaExistenciaArquivo("tabela_valortotal.html"):
+    if file_exists("tabela_valortotal.html"):
         os.remove(path+"/web/tabela_valortotal.html")
 
-    if verificaExistenciaArquivo("tabelaConfiguracoes.html"):
+    if file_exists("tabelaConfiguracoes.html"):
         os.remove(path+"/web/tabelaConfiguracoes.html")
 
 def open_dashboard():
-    deletaTabelasAntigas()
-    moveTabelas()
+    delete_old_tables()
+    move_table()
     webbrowser.open(path+"/web/lista.html",new=1)
-
-

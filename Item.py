@@ -2,16 +2,16 @@ class Item:
     def __init__(self) -> None:
         pass
 
-    def __init__(self, nome, peso, valor):
-        self.nome = nome
-        self.peso = peso #em quilos
-        self.valor = valor #em Reais
+    def __init__(self, name, weight, price):
+        self.name = name
+        self.peso = weight
+        self.price = price
 
-    def getNome(self):
-        return self.nome
+    def getName(self):
+        return self.name
     
-    def getPeso(self):
+    def getWeight(self):
         return self.peso
     
-    def getValor(self):
-        return self.valor
+    def getPrice(self):
+        return self.price
