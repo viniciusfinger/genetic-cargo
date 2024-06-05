@@ -1,6 +1,6 @@
 from random import getrandbits, random, randint
 from typing import List
-from Individual import *
+from Individual import Individual
 from Item import Item
 
 def create_individual(item_quantity: int) -> Individual:
@@ -29,7 +29,7 @@ def calculate_fitness(individual: Individual, load_capacity: float, items: List[
     """
     Calculate the fitness of an individual. The fitness is the total value of the items that.
     """
-    chromossomes = individual.getChromossomes()
+    chromossomes = individual.get_chromossomes()
     total_weight = 0
     total_value = 0
     item_index = 0
