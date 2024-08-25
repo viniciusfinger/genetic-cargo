@@ -36,7 +36,7 @@ def calculate_fitness(individual: Individual, load_capacity: float, items: List[
 
     while item_index < len(chromossomes):
         total_weight = total_weight + (chromossomes[item_index] * items[item_index].getWeight())
-        total_value = total_value + (chromossomes[item_index] * items[item_index].getValue())
+        total_value = total_value + (chromossomes[item_index] * items[item_index].getPrice())
         item_index += 1
 
     if (load_capacity - total_weight) < 0:
@@ -47,17 +47,20 @@ def calculate_fitness(individual: Individual, load_capacity: float, items: List[
 def evolve_population(population: List[Individual], load_capacity: float, items: List[Item], indivibuals_number: int, mutation_rate=0.05):
     #Classifica o fitness e seu respectivo indivíduo em um array
     parents_individuals = [[calculate_fitness(individual, load_capacity, items), individual] for individual in population if calculate_fitness(individual,load_capacity, items) >= 0]
-    parents_individuals.sort(reverse=True)
-
+    
+    # Order by fitness decreasing
+    parents_individuals.sort(reverse=True, key=lambda x: x[0])
+    
     #individuals reprodution
     children_individuals = []
 
     while len(children_individuals) < indivibuals_number:
+        # todo: should return individuals objects instead list
         dad, mom = draw_parents(parents_individuals)
-        half_chromossome_index = len(dad) // 2
+        half_chromossome_index = len(dad.get_chromossomes()) // 2
 
         #Filho vai ser a primeira metade do pai + a primeira metade da mãe
-        children = dad[:half_chromossome_index] + mom[half_chromossome_index:]
+        children = dad.get_chromossomes()[:half_chromossome_index] + mom.get_chromossomes()[half_chromossome_index:]
         children_individuals.append(children)
 
     '''Há 5% de chance (definido no parâmetro "mutacao" do método)
@@ -124,11 +127,11 @@ def get_best_individual(population, items):
     return population[best_individual_index]
 
 def calculate_total_value(individual, items):
-    item_quantity = len(individual)
+    item_quantity = len(individual.get_chromossomes())
     total_value = 0
 
     for i in range(item_quantity):
         if individual[i] == 1:
-            total_value += items[i].getValue()
+            total_value += items[i].getPrice()
         
     return total_value

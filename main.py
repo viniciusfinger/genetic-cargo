@@ -1,7 +1,8 @@
 from genetic import *
 from config import *
 
-population = create_population(individuals_number, items_number)
+
+population = create_population(individuals_number, len(items))
 
 fitness_history = []
 fitness_history.append(calculate_average_fitness(population, load_capacity, items))
