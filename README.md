@@ -13,5 +13,3 @@ Optimize your truck loading process with a genetic algorithm designed to select 
 Before running the application, ensure you have the following installed:
 
 - Python 🐍 (For running the application)
-
-//todo: improve this readme
